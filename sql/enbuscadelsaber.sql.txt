@@ -1,0 +1,148 @@
+# Stript enbuscadelsaber.sql.txt
+# Version 1.0
+# Autor: Jesse Rangel
+# Contacto: @Jesse_Rangel
+
+# Crear la tabla para el administrador
+CREATE TABLE tbl_administrador(
+	nadm_admin VARCHAR(30) NOT NULL COMMENT 'Nombre del administrador (username)',
+	nombre_admin VARCHAR(30) NOT NULL COMMENT 'Nombre real del administrador',
+	apellido_admin VARCHAR(30) NOT NULL COMMENT 'Apellido del administrador',
+	clave_admin VARCHAR(16) NOT NULL COMMENT 'Clave del administrador',
+	estatus_admin VARCHAR(10) NOT NULL COMMENT 'Estatus del administrador: Activo, Inactivo',
+	edad_admin INT NOT NULL COMMENT 'Edad del administrador',
+	sexo_admin VARCHAR(1) NOT NULL COMMENT 'Sexo del administrador',
+	idtemp_admin VARCHAR(50) NOT NULL COMMENT 'Id temporal del administrador',
+	PRIMARY KEY(nadm_admin)
+)ENGINE=MyISAM DEFAULT CHARSET=latin1; 
+# agrega registros a la tabla de administrador
+INSERT INTO tbl_administrador (nadm_admin,nombre_admin,apellido_admin,clave_admin,estatus_admin,edad_admin,sexo_admin) VALUES
+('admin','admin','admin','admin','ACTIVO',21,'M');
+
+# Crear la tabla para el registro
+CREATE TABLE tbl_usuario(
+	nusua_usuario VARCHAR(30) NOT NULL COMMENT 'Nombre de usuario (username)',
+	nombre_usuario VARCHAR(30) NOT NULL COMMENT 'Nombre real del usuario',
+	apellido_usuario VARCHAR(30) NOT NULL COMMENT 'Apellido del usuario',
+	clave_usuario VARCHAR(16) NOT NULL COMMENT 'Clave del usuario',
+	estatus_usuario	VARCHAR(10) NOT NULL COMMENT 'Estatus del usuario: Activo, Inactivo',
+	edad_usuario INT NOT NULL COMMENT 'Edad del usuario',
+	sexo_usuario VARCHAR(1) NOT NULL COMMENT 'Sexo del usuario',
+	idtemp_usuario VARCHAR(50) NOT NULL COMMENT 'Id temporal del usuario',
+	PRIMARY KEY(nusua_usuario)
+)ENGINE=MyISAM DEFAULT CHARSET=latin1; 
+
+# Crear la tabla para los ejercicios
+CREATE TABLE tbl_ejercicios (
+    id_ejerc INTEGER(5) NOT NULL AUTO_INCREMENT COMMENT "Id del ejercicio",
+    id_respcorr_ejerc INTEGER(5) NOT NULL COMMENT "Id de la respuesta correcta",
+    cont_ejerc VARCHAR(12) NOT NULL COMMENT "Contenido de del ejercicio",
+    estatus_ejerc varchar(10) NOT NULL COMMENT "Estatus del ejercicio",
+    PRIMARY KEY(id_ejerc)
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+# agrega registros a la tabla de preguntas
+INSERT INTO tbl_ejercicios(id_ejerc,id_respcorr_ejerc,cont_ejerc,estatus_ejerc) VALUES
+(1,1,'1 + 3 = ?','ACTIVO'),
+(2,5,'5 + 8 = ?','ACTIVO'),
+(3,9,'10 + 9 = ?','ACTIVO'),
+(4,10,'12 + 7 = ?','ACTIVO'),
+(5,14,'6 + 12 = ?','ACTIVO'),
+(6,18,'12 - 6 = ?','ACTIVO'),
+(7,19,'8 - 2 = ?','ACTIVO'),
+(8,23,'10 - 7 = ?','ACTIVO'),
+(9,26,'20 - 12 = ?','ACTIVO'),
+(10,28,'5 - 2 = ?','ACTIVO'),
+(11,32,'2 x 3 = ?','ACTIVO'),
+(12,36,'5 x 4 = ?','ACTIVO'),
+(13,37,'7 x 6 = ?','ACTIVO'),
+(14,41,'4 x 4 = ?','ACTIVO'),
+(15,45,'6 x 5 = ?','ACTIVO'),
+(16,48,'4 : 2 = ?','ACTIVO'),
+(17,49,'12 : 3 = ?','ACTIVO'),
+(18,53,'16 : 2 = ?','ACTIVO'),
+(19,57,'15 : 3 = ?','ACTIVO'),
+(20,60,'54 : 6 = ?','ACTIVO');
+
+# Crear la tabla para las respuestas
+CREATE TABLE tbl_respuestas (
+    id_resp INTEGER(5) NOT NULL AUTO_INCREMENT COMMENT "Id de la respuesta",
+    id_ejerc INTEGER(5) NOT NULL COMMENT "Id del ejercicio",
+    cont_resp VARCHAR(10) NOT NULL COMMENT "Contenido de la respuesta",
+    estatus_ejerc varchar(10) NOT NULL COMMENT "Estatus del ejercicio",
+    PRIMARY KEY(id_resp),
+    FOREIGN KEY(id_ejerc) REFERENCES tbl_ejercicios(id_ejerc)
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+# Agrega registros a la tabla de respuestas
+INSERT INTO tbl_respuestas (id_resp,id_ejerc,cont_resp,estatus_ejerc) VALUES
+(1,1,'4','ACTIVO'),
+(2,1,'6','ACTIVO'),
+(3,1,'5','ACTIVO'),
+(4,2,'15','ACTIVO'),
+(5,2,'13','ACTIVO'),
+(6,2,'10','ACTIVO'),
+(7,3,'16','ACTIVO'),
+(8,3,'14','ACTIVO'),
+(9,3,'19','ACTIVO'),
+(10,4,'19','ACTIVO'),
+(11,4,'20','ACTIVO'),
+(12,4,'21','ACTIVO'),
+(13,5,'15','ACTIVO'),
+(14,5,'18','ACTIVO'),
+(15,5,'20','ACTIVO'),
+(16,6,'8','ACTIVO'),
+(17,6,'7','ACTIVO'),
+(18,6,'6','ACTIVO'),
+(19,7,'6','ACTIVO'),
+(20,7,'5','ACTIVO'),
+(21,7,'7','ACTIVO'),
+(22,8,'2','ACTIVO'),
+(23,8,'3','ACTIVO'),
+(24,8,'4','ACTIVO'),
+(25,9,'10','ACTIVO'),
+(26,9,'8','ACTIVO'),
+(27,9,'12','ACTIVO'),
+(28,10,'3','ACTIVO'),
+(29,10,'2','ACTIVO'),
+(30,10,'4','ACTIVO'),
+(31,11,'5','ACTIVO'),
+(32,11,'6','ACTIVO'),
+(33,11,'8','ACTIVO'),
+(34,12,'25','ACTIVO'),
+(35,12,'16','ACTIVO'),
+(36,12,'20','ACTIVO'),
+(37,13,'42','ACTIVO'),
+(38,13,'34','ACTIVO'),
+(39,13,'46','ACTIVO'),
+(40,14,'8','ACTIVO'),
+(41,14,'16','ACTIVO'),
+(42,14,'13','ACTIVO'),
+(43,15,'20','ACTIVO'),
+(44,15,'25','ACTIVO'),
+(45,15,'30','ACTIVO'),
+(46,16,'1','ACTIVO'),
+(47,16,'3','ACTIVO'),
+(48,16,'2','ACTIVO'),
+(49,17,'4','ACTIVO'),
+(50,17,'6','ACTIVO'),
+(51,17,'2','ACTIVO'),
+(52,18,'9','ACTIVO'),
+(53,18,'8','ACTIVO'),
+(54,18,'7','ACTIVO'),
+(55,19,'7','ACTIVO'),
+(56,19,'4','ACTIVO'),
+(57,19,'5','ACTIVO'),
+(58,20,'16','ACTIVO'),
+(59,20,'12','ACTIVO'),
+(60,20,'9','ACTIVO');
+
+# Crear la tabla para la auditoria
+CREATE TABLE tbl_auditoria(
+	id_auditoria INT(11) NOT NULL AUTO_INCREMENT COMMENT 'ID de la auditoria',
+	nusua_usuario VARCHAR(30) NOT NULL COMMENT 'Nombre de usuario (username)',
+	accion_auditoria VARCHAR(100) COMMENT 'Accion de la auditoria',
+	tiemporeg_auditoria TIMESTAMP COMMENT 'Tiempo del registro de la auditoria',
+	PRIMARY KEY(id_auditoria),
+	FOREIGN KEY(nusua_usuario) REFERENCES tbl_usuario(nusua_usuario)
+)ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1; 
