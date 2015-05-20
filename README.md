@@ -1,6 +1,4 @@
 # En busca del saber
-
-Fecha pub: 19-05-2015
 Versión: 1.0.0
 
 Descripción
